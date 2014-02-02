@@ -1,0 +1,10 @@
+Package: ggpca
+Type: Package
+Title: Creates ggplot biplot methods for pca objects
+Version: 0.1
+Date: 2014-02-01
+Author: Etienne Low-Décarie
+Maintainer: Etienne Low-Décarie <etienne.decarie@gmail.com>
+Description: Creates ggplot autplot methods for pca objects
+License: GPL-3
+Depends: ggplot2, proto, grid, MASS
