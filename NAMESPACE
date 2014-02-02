@@ -1,1 +1,2 @@
 export(ggbiplot.prcomp)
+export(ggbiplot.princomp)

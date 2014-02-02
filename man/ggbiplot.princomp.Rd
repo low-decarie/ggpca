@@ -1,11 +1,12 @@
-\name{ggbiplot.prcomp}
-\alias{ggbiplot.prcomp}
+\name{ggbiplot.princomp}
+\alias{ggbiplot.princomp}
 \title{The length of a string (in characters).}
 \usage{
-ggbiplot.prcomp(PC, selected.pc = c("PC1", "PC2"), obsnames, scale = 1, ...)
+ggbiplot.princomp(PC, selected.pc = c("Comp.1", "Comp.2"), obsnames,
+  scale = 1, ...)
 }
 \arguments{
-  \item{PC}{a fitted object from prcomp (from stats
+  \item{PC}{a fitted object from princomp (from stats
   package)}
 
   \item{selected.pc}{name of two principle components}
@@ -23,14 +24,14 @@ a ggplot object
 The length of a string (in characters).
 }
 \examples{
-p <- ggbiplot.prcomp(PC=prcomp(iris[,-5]),
-                   selected.pc=c("PC1","PC2"),
+p <- ggbiplot.princomp(PC=princomp(iris[,-5]),
+                   selected.pc=c("Comp.1","Comp.2"),
                    obsnames=iris[,5],
                    main="PCA of iris dataset")
 print(p)
 }
 \seealso{
-\code{\link{prcomp}}
+\code{\link{princomp}}
 }
 \keyword{pca}
 
