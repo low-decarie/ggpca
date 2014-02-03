@@ -1,39 +1,23 @@
-ggbiplot <- function(rotated.data,loadings,x,y,scale,...)
-{
-mult <- min(
-  (max(rotated.data[,y]) - min(rotated.data[,y])/(max(loadings[,y])-min(loadings[,y]))),
-  (max(rotated.data[,x]) - min(rotated.data[,x])/(max(loadings[,x])-min(loadings[,x])))
-)
+#' Generic ggplot biplot function
+#'
+#' @param PC a fitted object from prcomp (from stats package)
+#' @param selected.pc number of two principle components
+#' @param obsnames name assigned to each point
+#' @param scale scaling for explanatory variable arrows
+#' @param ... other arguments to be passed to qplot
+#' @return a ggplot object
+#' @keywords pca
+#' @seealso \code{\link{prcomp}}
+#' @export
+#' @examples
+#'p <- ggbiplot(PC=prcomp(iris[,-5]),
+#'                    selected.pc=c(1,2),
+#'                    obsnames=iris[,5],
+#'                    main="PCA of iris dataset")
+#'print(p)
 
-loadings <- transform(loadings,
-                      v1 = scale * mult * (get(x)),
-                      v2 = scale * mult * (get(y))
-)
-
-loadings$length <- with(loadings, sqrt(v1^2+v2^2))
-loadings <- loadings[order(-loadings$length),]
-
-p <- qplot(data=rotated.data,
-           x=get(x),
-           y=get(y),
-           shape=obsnames)
-p <- p + stat_ellipse(aes(group=obsnames))
-p <- p + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
-p <- p + geom_text(data=loadings, 
-                   aes(x=v1, y=v2,
-                       label=varnames,
-                       shape=NULL,
-                       linetype=NULL,
-                       alpha=length), 
-                   size = 3, vjust=0.5,
-                   hjust=0, color="red")
-p <- p + geom_segment(data=loadings, 
-                      aes(x=0, y=0, xend=v1,
-                          yend=v2, shape=NULL, 
-                          linetype=NULL,
-                          alpha=length),
-                      arrow=arrow(length=unit(0.2,"cm")),
-                      alpha=0.5, color="red")
-
-
-return(p)}
+ggbiplot <- function(PC,
+                     selected.pc=c(1,2),
+                     obsnames,
+                     scale=1,
+                     ...) UseMethod("ggbiplot", PC)

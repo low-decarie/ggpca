@@ -1,9 +1,8 @@
-\name{ggbiplot.prcomp}
-\alias{ggbiplot.prcomp}
-\title{ggplot biplot function for prcomp objects}
+\name{ggbiplot}
+\alias{ggbiplot}
+\title{Generic ggplot biplot function}
 \usage{
-\method{ggbiplot}{prcomp}(PC, selected.pc = c(1, 2), obsnames, scale = 1,
-  ...)
+ggbiplot(PC, selected.pc = c(1, 2), obsnames, scale = 1, ...)
 }
 \arguments{
   \item{PC}{a fitted object from prcomp (from stats
@@ -21,10 +20,10 @@
 a ggplot object
 }
 \description{
-ggplot biplot function for prcomp objects
+Generic ggplot biplot function
 }
 \examples{
-p <- ggbiplot.prcomp(PC=prcomp(iris[,-5]),
+p <- ggbiplot(PC=prcomp(iris[,-5]),
                    selected.pc=c(1,2),
                    obsnames=iris[,5],
                    main="PCA of iris dataset")

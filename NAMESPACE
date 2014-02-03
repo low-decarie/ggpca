@@ -1,2 +1,5 @@
-export(ggbiplot.prcomp)
-export(ggbiplot.princomp)
+export(ggbiplot)
+
+S3method(ggbiplot,princomp)
+S3method(ggbiplot,prcomp)
+S3method(ggbiplot,default)

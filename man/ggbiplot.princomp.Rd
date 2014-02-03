@@ -1,15 +1,15 @@
 \name{ggbiplot.princomp}
 \alias{ggbiplot.princomp}
-\title{The length of a string (in characters).}
+\title{ggplot biplot function for princomp objects}
 \usage{
-ggbiplot.princomp(PC, selected.pc = c("Comp.1", "Comp.2"), obsnames,
-  scale = 1, ...)
+\method{ggbiplot}{princomp}(PC, selected.pc = c(1, 2), obsnames, scale = 1,
+  ...)
 }
 \arguments{
   \item{PC}{a fitted object from princomp (from stats
   package)}
 
-  \item{selected.pc}{name of two principle components}
+  \item{selected.pc}{number of two principle components}
 
   \item{obsnames}{name assigned to each point}
 
@@ -21,11 +21,11 @@ ggbiplot.princomp(PC, selected.pc = c("Comp.1", "Comp.2"), obsnames,
 a ggplot object
 }
 \description{
-The length of a string (in characters).
+ggplot biplot function for princomp objects
 }
 \examples{
 p <- ggbiplot.princomp(PC=princomp(iris[,-5]),
-                   selected.pc=c("Comp.1","Comp.2"),
+                   selected.pc=c(1,2),
                    obsnames=iris[,5],
                    main="PCA of iris dataset")
 print(p)
