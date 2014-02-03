@@ -2,8 +2,8 @@
 \alias{ggbiplot.prcomp}
 \title{ggplot biplot function for prcomp objects}
 \usage{
-\method{ggbiplot}{prcomp}(PC, selected.pc = c(1, 2), obsnames, scale = 1,
-  ...)
+\method{ggbiplot}{prcomp}(PC, selected.pc = c(1, 2), groups = NULL,
+  scale = 1, length.alpha = T, ...)
 }
 \arguments{
   \item{PC}{a fitted object from prcomp (from stats
@@ -11,7 +11,7 @@
 
   \item{selected.pc}{number of two principle components}
 
-  \item{obsnames}{name assigned to each point}
+  \item{groups}{group assigned to each point}
 
   \item{scale}{scaling for explanatory variable arrows}
 
@@ -24,10 +24,9 @@ a ggplot object
 ggplot biplot function for prcomp objects
 }
 \examples{
-p <- ggbiplot.prcomp(PC=prcomp(iris[,-5]),
-                   selected.pc=c(1,2),
-                   obsnames=iris[,5],
-                   main="PCA of iris dataset")
+p <- ggbiplot.prcomp(PC=prcomp(iris[,-5]))
+print(p)
+#'p <- ggbiplot.prcomp(PC=prcomp(iris[,-5]), iris[,5])
 print(p)
 }
 \seealso{

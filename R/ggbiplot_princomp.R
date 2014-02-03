@@ -19,17 +19,17 @@
 
 ggbiplot.princomp <- function(PC,
                             selected.pc=c(1,2),
-                            obsnames,
+                            groups=NULL,
                             scale=1,
                             ...)
 {
-  rotated.data <- data.frame(obsnames=obsnames, PC$scores)
+  rotated.data <- data.frame(PC$scores)
   
   raw.loadings <- PC$loadings
   class(raw.loadings) <- "matrix"
   loadings <- data.frame(varnames=rownames(raw.loadings), t(t(raw.loadings) * PC$sdev))
   
-  p <- ggbiplot.default(rotated.data,loadings,selected.pc,scale,...)
+  p <- ggbiplot.default(rotated.data,loadings,selected.pc,groups,scale,...)
   
   return(p)
 

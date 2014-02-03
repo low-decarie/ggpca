@@ -1,7 +1,27 @@
-ggbiplot.default <- function(rotated.data,loadings,selected.pc,scale,...)
+#' ggplot biplot function for princomp objects
+#'
+#' @param PC a fitted object from princomp (from stats package)
+#' @param selected.pc number of two principle components
+#' @param obsnames name assigned to each point
+#' @param scale scaling for explanatory variable arrows
+#' @param ... other arguments to be passed to qplot
+#' @return a ggplot object
+#' @keywords pca
+#' @seealso \code{\link{biplot}}
+#' @export
+
+
+
+ggbiplot.default <- function(rotated.data,
+                             loadings,
+                             selected.pc=c(1,2),
+                             groups=NULL,
+                             scale=1,
+                             length.alpha=T,...)
 {
-x <- names(rotated.data)[selected.pc[1]+1]
-y <- names(rotated.data)[selected.pc[2]+1]
+  
+x <- names(rotated.data)[selected.pc[1]]
+y <- names(rotated.data)[selected.pc[2]]
   
 mult <- min(
   (max(rotated.data[,y]) - min(rotated.data[,y])/(max(loadings[,y])-min(loadings[,y]))),
@@ -13,14 +33,43 @@ loadings <- transform(loadings,
                       v2 = scale * mult * (get(y))
 )
 
+
 loadings$length <- with(loadings, sqrt(v1^2+v2^2))
 loadings <- loadings[order(-loadings$length),]
 
+
+if(length.alpha==F){loadings$length <- 1}
+
+if(is.null(groups)){
+  rotated.data$obsnames <- row.names(rotated.data)
+  p <- qplot(data=rotated.data,
+             x=get(x),xlab=x,
+             y=get(y),ylab=y,
+             label=obsnames,
+             geom="text",
+             alpha=0.5)
+  
+}
+
+if(!is.null(groups) & length(unique(groups))<=6){
+  groups <- as.factor(groups)
 p <- qplot(data=rotated.data,
            x=get(x),xlab=x,
            y=get(y),ylab=y,
-           shape=obsnames)
-p <- p + stat_ellipse(aes(group=obsnames))
+           shape=groups)
+p <- p + stat_ellipse(aes(linetype=groups))
+}
+
+
+if(length(unique(groups))>6){
+  p <- qplot(data=rotated.data,
+             x=get(x),xlab=x,
+             y=get(y),ylab=y,
+             colour=groups)
+  p <- p + stat_ellipse()
+}
+
+
 p <- p + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
 p <- p + geom_text(data=loadings, 
                    aes(x=v1, y=v2,
@@ -32,11 +81,13 @@ p <- p + geom_text(data=loadings,
                    hjust=0, color="red")
 p <- p + geom_segment(data=loadings, 
                       aes(x=0, y=0, xend=v1,
-                          yend=v2, shape=NULL, 
+                          yend=v2, shape=NULL, label=NULL,
                           linetype=NULL,
                           alpha=length),
                       arrow=arrow(length=unit(0.2,"cm")),
                       alpha=0.5, color="red")
+
+p <- p + scale_alpha(guide="none")
 
 
 return(p)}
