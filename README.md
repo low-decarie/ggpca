@@ -23,6 +23,7 @@ This is an exercise in creating a package and is obviously a work in progress.
 This may not be the proper approach to producing a biplot from a PCA analysis.
 Feedback is appreciated.
 Plans:
+- [x] get started
 - [ ] print rownames on plot (as in base biplot)
 - [ ] make grouping variable optional
 - [ ] allow control of number of predictive variables plotted
