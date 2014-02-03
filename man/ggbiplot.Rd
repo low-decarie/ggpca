@@ -6,8 +6,7 @@ ggbiplot(PC, selected.pc = c(1, 2), groups = NULL, scale = 1,
   length.alpha = T, ...)
 }
 \arguments{
-  \item{PC}{a fitted object from prcomp (from stats
-  package)}
+  \item{PC}{a fitted object}
 
   \item{selected.pc}{vector of length 2 number of two
   principle components}
@@ -25,7 +24,21 @@ ggbiplot(PC, selected.pc = c(1, 2), groups = NULL, scale = 1,
 a ggplot object
 }
 \description{
-Generic ggplot biplot function
+Produces a ggplot biplot from an PCA analysis similar to
+biplot.  Currently has methods for princomp and prcomp.
+}
+\details{
+If \code{groups} acts as stats:::biplot If \code{groups} is
+specified and has 6 or less unique values, observations are
+presented as different shapes for each group (ggplot
+\code{shape} argument) and circled with a 95% confidence
+interval ellipses, each group having an ellipsis with a
+different \code{linetype}. If \code{groups} is specified
+and has more than 6 unique values, observations are
+presented with different colours for each group (ggplot
+\code{colour} argument) and circled with a 95% confidence
+interval ellipses, each group having an ellipsis with a
+different \code{colour}.
 }
 \examples{
 # Can be used on the results of princomp and prcomp

@@ -1,17 +1,3 @@
-#' ggplot biplot function for princomp objects
-#'
-#' @param PC a fitted object from princomp (from stats package)
-#' @param selected.pc number of two principle components
-#' @param obsnames name assigned to each point
-#' @param scale scaling for explanatory variable arrows
-#' @param ... other arguments to be passed to qplot
-#' @return a ggplot object
-#' @keywords pca
-#' @seealso \code{\link{biplot}}
-#' @export
-
-
-
 ggbiplot.default <- function(rotated.data,
                              loadings,
                              selected.pc=c(1,2),

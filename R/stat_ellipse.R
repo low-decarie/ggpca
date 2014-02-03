@@ -1,37 +1,19 @@
-#Based on the function created by Josef Fruehwald
-#https://github.com/JoFrhwld/FAAV/blob/master/r/stat-ellipse.R
-
-StatEllipse <- proto(ggplot2:::Stat,
-{
-  required_aes <- c("x", "y")
-  default_geom <- function(.) GeomPath
-  objname <- "ellipse"
-  
-  calculate_groups <- function(., data, scales, ...){
-    .super$calculate_groups(., data, scales,...)
-  }
-  calculate <- function(., data, scales, level = 0.75, segments = 51,...){
-    dfn <- 2
-    dfd <- length(data$x) - 1
-    if (dfd < 3){
-      ellipse <- rbind(c(NA,NA))    
-    } else {
-      v <- cov.trob(cbind(data$x, data$y))
-      shape <- v$cov
-      center <- v$center
-      radius <- sqrt(dfn * qf(level, dfn, dfd))
-      angles <- (0:segments) * 2 * pi/segments
-      unit.circle <- cbind(cos(angles), sin(angles))
-      ellipse <- t(center + radius * t(unit.circle %*% chol(shape)))
-    }
-    
-    ellipse <- as.data.frame(ellipse)
-    colnames(ellipse) <- c("x","y")
-    return(ellipse)
-  }
-}
-)
-
+#' Generic ggplot biplot function
+#'
+#' @description Adds 95\% confidence intervals ellipses around groups of values in a ggplot
+#' @param mapping The aesthetic mapping, usually constructed with aes or aes_string. Only needs to be set at the layer level if you are overriding the plot defaults.
+#' @param data A layer specific dataset - only needed if you want to override the plot defaults.
+#' @param stat The statistical transformation to use on the data for this layer.
+#' @param position The position adjustment to use for overlappling points on this layer
+#' @param ... other arguments passed on to \code{\link{layer}}. This can include aesthetics whose values you want to set, not map. See \code{\link{biplot}} for more details.
+#' @note Based on a function by Josef Fruehwald available \href{https://github.com/JoFrhwld/FAAV/blob/master/r/stat-ellipse.R}{here on github}
+#' @examples
+#'p <- qplot(data=iris,
+#'            x=Sepal.Length,
+#'            y=Petal.Length,
+#'            colour=Species)
+#'p <- p + stat_ellipse()
+#'print(p)
 stat_ellipse <- function(mapping=NULL, data=NULL, geom="path", position="identity", ...) {
   StatEllipse$new(mapping=mapping, data=data, geom=geom, position=position, ...)
 }
