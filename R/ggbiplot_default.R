@@ -74,14 +74,16 @@ p <- p + geom_text(data=loadings,
                        linetype=NULL,
                        alpha=length), 
                    size = 3, vjust=0.5,
-                   hjust=0, color="red")
+#                   color="red",
+                   hjust=0)
 p <- p + geom_segment(data=loadings, 
                       aes(x=0, y=0, xend=v1,
                           yend=v2, shape=NULL, label=NULL,
                           linetype=NULL,
                           alpha=length),
+#                       color="red",
                       arrow=arrow(length=unit(0.2,"cm")),
-                      alpha=length, color="red")
+                      alpha=length)
 
 p <- p + scale_alpha(guide="none")
 
