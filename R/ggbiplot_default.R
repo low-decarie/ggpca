@@ -37,7 +37,8 @@ if(is.null(groups)){
              y=get(y),ylab=y,
              label=obsnames,
              geom="text",
-             alpha=0.5)
+             alpha=0.5,
+             ...)
   
 }
 
@@ -47,7 +48,7 @@ p <- qplot(data=rotated.data,
            x=get(x),xlab=x,
            y=get(y),ylab=y,
            shape=groups,
-           colour=groups)
+           ...)
 p <- p + stat_ellipse(aes(linetype=groups))
 }
 
@@ -56,7 +57,8 @@ if(length(unique(groups))>6){
   p <- qplot(data=rotated.data,
              x=get(x),xlab=x,
              y=get(y),ylab=y,
-             colour=groups)
+             colour=groups,
+             ...)
   p <- p + stat_ellipse()
 }
 
