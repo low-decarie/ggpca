@@ -2,6 +2,7 @@ ggbiplot.princomp <- function(PC,
                             selected.pc=c(1,2),
                             groups=NULL,
                             scale=1,
+                            varnames=NULL,
                             ...)
 {
   rotated.data <- data.frame(PC$scores)

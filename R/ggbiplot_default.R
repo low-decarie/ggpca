@@ -3,7 +3,10 @@ ggbiplot.default <- function(rotated.data,
                              selected.pc=c(1,2),
                              groups=NULL,
                              scale=1,
-                             length.alpha=T,...)
+                             length.alpha=T,
+                             varnames=NULL,
+                             numvars=nrow(loadings),
+                             ...)
 {
   
 x <- names(rotated.data)[selected.pc[1]]
@@ -22,9 +25,10 @@ loadings <- transform(loadings,
 
 loadings$length <- with(loadings, sqrt(v1^2+v2^2))
 loadings <- loadings[order(-loadings$length),]
+loadings <- loadings[1:numvars,]
 
 
-if(length.alpha==F){loadings$length <- 1}
+if(!length.alpha){loadings$length <- 1}
 
 if(is.null(groups)){
   rotated.data$obsnames <- row.names(rotated.data)
@@ -55,6 +59,9 @@ if(length(unique(groups))>6){
   p <- p + stat_ellipse()
 }
 
+if(!is.null(varnames)){
+  loadings$varnames <- varnames
+}
 
 p <- p + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
 p <- p + geom_text(data=loadings, 
@@ -71,7 +78,7 @@ p <- p + geom_segment(data=loadings,
                           linetype=NULL,
                           alpha=length),
                       arrow=arrow(length=unit(0.2,"cm")),
-                      alpha=0.5, color="red")
+                      alpha=length, color="red")
 
 p <- p + scale_alpha(guide="none")
 

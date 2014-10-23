@@ -6,6 +6,7 @@
 #' @param groups vector group assigned to each point
 #' @param length.alpha logical wether transparency of explanatory variables should vary with length
 #' @param scale scaling for explanatory variable arrows
+#' @param varnames
 #' @param ... other arguments to be passed to qplot
 #' @details If \code{groups} acts as stats:::biplot
 #' If \code{groups} is specified and has 6 or less unique values, observations are presented as different shapes for each group (ggplot \code{shape} argument) and circled with a 95% confidence interval ellipses, each group having an ellipsis with a different \code{linetype}.

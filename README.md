@@ -24,6 +24,7 @@ This may not be the proper approach to producing a biplot from a PCA analysis.
 Feedback is appreciated.
 Plans:
 - [ ] allow control of number of predictive variables plotted
+- [ ] auto select scale
 - [ ] improve documentation
 - [ ] add basic plotting method for pca objects (equivalent to plot(princomp(x))
 - [ ] create methods for other classes
