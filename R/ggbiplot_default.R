@@ -46,7 +46,8 @@ if(!is.null(groups) & length(unique(groups))<=6){
 p <- qplot(data=rotated.data,
            x=get(x),xlab=x,
            y=get(y),ylab=y,
-           shape=groups)
+           shape=groups,
+           colour=groups)
 p <- p + stat_ellipse(aes(linetype=groups))
 }
 
