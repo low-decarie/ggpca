@@ -37,7 +37,7 @@ if(is.null(groups)){
              y=get(y),ylab=y,
              label=obsnames,
              geom="text",
-             alpha=0.5,
+#              alpha=0.5,
              ...)
   
 }
